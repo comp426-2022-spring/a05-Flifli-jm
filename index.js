@@ -54,6 +54,7 @@ if (args.log == 'false') {
     const accessLog = fs.createWriteStream( logdir+'access.log', { flags: 'a' })
     app.use(morgan('combined', { stream: accessLog }))
 }
+//save static HTML
 app.use(express.static('./public'))
 
 // Store help text 
@@ -83,14 +84,18 @@ if (args.help || args.h) {
 const server = app.listen (HTTP_PORT, () => {
     console.log("App listening on port %PORT%".replace("%PORT%", HTTP_PORT));
 });
-
+//if log false do not creat log file 
 if (args.log == 'false') {
     console.log("Nothing")
   
   } else {
-    const accessLog = fs.createWriteStream('access.log', { flags: 'a' })
-    app.use(morgan('combined', { stream: accessLog }))
-}
+        const logdir = './log/';
+        if (!fs.existsSync(logdir)){
+            fs.mkdirSync(logdir);
+        }
+        const accessLog = fs.createWriteStream( logdir+'access.log', { flags: 'a' })
+        app.use(morgan('combined', { stream: accessLog }))
+    }
 
 if (args.debug || args.d) {
     app.get('/app/log/access/', (req, res,next) => {
