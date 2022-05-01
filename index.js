@@ -119,6 +119,10 @@ app.get("/app/flip/", (req, res,next) => {
     })
 })
 
+app.post('/app/flip/call/', (req, res, next) => {
+    const r = flipACoin(req.body.guess)
+    res.status(200).json(r)
+});
 
 app.get('/app/flips/:number', (req, res,next) => {
     const raw = coinFlips(req.params.number);
@@ -129,6 +133,10 @@ app.get('/app/flips/:number', (req, res,next) => {
     });
 });
 
+app.get('/app/flip/call/:guess(heads|tails)/', (req, res, next) => {
+    const r = flipACoin(req.body.guess)
+    res.status(200).json(r)
+});
 
 
 app.get("/app/flip/call/heads", (req, res,next) => {
