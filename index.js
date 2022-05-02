@@ -1,5 +1,4 @@
 // Place your server entry point code here
-const db = require('./database.js')
 const express = require('express')
 const app = express();
 const fs = require("fs")
@@ -7,6 +6,7 @@ const morgan = require('morgan')
 const logdb = require("./src/services/database.js")
 const minimist = require('minimist')
 const args = minimist(process.argv.slice(2));
+args['port', 'debug', 'log', 'help'];
 var port = args['port'] || args.p || 5000
 
 //express handle json
