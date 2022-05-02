@@ -69,6 +69,11 @@ if (args.help || args.h) {
     process.exit(0)
 }
 
+//define HTTP_PORT
+args['port']
+const HTTP_PORT = args.port ? args.port : 5000;
+
+
 //start an app server
 const server = app.listen (HTTP_PORT, () => {
     console.log("App listening on port %PORT%".replace("%PORT%", HTTP_PORT));
