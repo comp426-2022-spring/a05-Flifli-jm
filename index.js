@@ -8,8 +8,12 @@ const logdb = require('./src/services/database.js')
 const minimist = require('minimist')
 const args = minimist(process.argv.slice(2));
 
+//express handle json
+app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+//save static HTML
+app.use(express.static('./public'))
 //loging db
 app.use((req, res, next) => {
     let logdata = {
@@ -39,23 +43,7 @@ app.use((req, res, next) => {
         logdata.useragent)
     next();
 })
-args["port"]
-const port = args.port || args.p || process.env.PORT || 5000
 
-if (args.log == 'false') {
-    console.log("NOTICE: not creating file access.log")
-} else {
-//morgan to log file
-    const logdir = './log/';
-
-    if (!fs.existsSync(logdir)){
-        fs.mkdirSync(logdir);
-    }
-    const accessLog = fs.createWriteStream( logdir+'access.log', { flags: 'a' })
-    app.use(morgan('combined', { stream: accessLog }))
-}
-//save static HTML
-app.use(express.static('./public'))
 
 // Store help text 
 const help = (`
