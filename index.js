@@ -82,7 +82,7 @@ if (args.log == 'false') {
         if (!fs.existsSync(logdir)){
             fs.mkdirSync(logdir);
         }
-        const accessLog = fs.createWriteStream( logdir+'access.log', { flags: 'a' })
+        const accessLog = fs.createWriteStream( logdir + "access.log", { flags: 'a' })
         app.use(morgan('combined', { stream: accessLog }))
     }
 
