@@ -2,11 +2,12 @@
 const db = require('./database.js')
 const express = require('express')
 const app = express();
-const fs = require('fs')
+const fs = require("fs")
 const morgan = require('morgan')
-const logdb = require('./src/services/database.js')
+const logdb = require("./src/services/database.js")
 const minimist = require('minimist')
 const args = minimist(process.argv.slice(2));
+var port = args['port'] || args.p || 5000
 
 //express handle json
 app.use(express.json());
@@ -96,7 +97,9 @@ if (args.debug || args.d) {
 }
 
 app.get("/app/", (req, res,next) => {
-  res.status(200).json("200 OK");
+    res.status(200).json("200 OK");
+    res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+    res.end(res.statusCode+ ' ' +res.statusMessage)
 });
 
 
@@ -121,6 +124,12 @@ app.get('/app/flips/:number', (req, res,next) => {
     });
 });
 
+app.post('/app/flip/coins/', (req, res, next) => {
+    const flips = coinFlips(req.body.number)
+    const count = countFlips(flips)
+    res.status(200).json({ "raw": flips, "summary": count })
+});
+
 app.get('/app/flip/call/:guess(heads|tails)/', (req, res, next) => {
     const r = flipACoin(req.body.guess)
     res.status(200).json(r)
@@ -137,6 +146,7 @@ app.get("/app/flip/call/tails", (req, res,next) => {
 
 app.use(function(req, res){
     res.status(404).send("404 NOT FOUND")
+    res.status(statusCode).end(statusCode+ ' ' +statusMessage)
 })
 
 //coinFlip()

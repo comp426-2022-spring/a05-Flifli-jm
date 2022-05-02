@@ -6,7 +6,6 @@ const db = new Database('log.db')
 
 const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='accesslog'`)
 let row =  stmt.get();
-// this checks if the database exists and creates one if it does not
 if (row === undefined) {
     console.log('log database is missing. Creating log database.')
     const sqlInit = `
