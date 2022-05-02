@@ -32,43 +32,18 @@
       <button id="multinav">Flip multiple coins</button>
       <button id="guessnav">Guess the result</button>
     </nav>
-
-    <!--The home page of the web-->
-    <div id="home">This is the main page of the coin flip game. The game allows the user to do:
-        <li>Flip single coin</li>
-        <li>Flip multiple coins</li>
-        <li>Guess a coin</li>
+    <div id="home">
+      
     </div>    
-
-    <!--The sigle flip page-->
     <div id="single" class="hidden">
-      <button onclick="singleFlip()">Single Flip Start</button>
-      <p id="singleResult"></p>
-      <img id="singleresultimg" src=""/>
+      
     </div>
-
-    <!--The multi flip page-->
     <div id="multi" class="hidden">
-      <form id="multiform" action="/app/flips/:number">
-        <label for="number">Enter the number of flips: </label>
-        <input type="number" name="number" id="number" required, placeholder="ENTER NUMBER" min="0">
-        <input type="submit" value="start flips">
-      </form>
-      <span>Results:</span>
-      <div id="multiresult"></div>
-      <p id="numHead">Heads: </p>
-      <p id="numTail">Tails: </p>
+      
     </div>
-
-    <!--Guess -->
     <div id="guess" class="hidden">
-      <button id="guessHead" onclick="guessHeads()">I guess head</button>
-      <button id="guessTail" onclick="guessTails()">I guess tail</button>
-      <p id="guessed">you guessed: </p>
-      <p>result: </p>
-      <img id = "winloseimg" src="" class="hidden">
+      
     </div>
-
 	<script src="main.js"></script>
   </body>
 </html>
